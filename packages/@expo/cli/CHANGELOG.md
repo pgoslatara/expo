@@ -6,6 +6,8 @@
 
 ### 🎉 New features
 
+- Add `--browser` option to `expo login`. ([#42614](https://github.com/expo/expo/pull/42614) by [@byronkarlen](https://github.com/byronkarlen))
+
 ### 🐛 Bug fixes
 
 - Reallow connections on `/expo-dev-plugins/broadcast` broadcast socket to local connections ([#42538](https://github.com/expo/expo/pull/42538) by [@kitten](https://github.com/kitten))
