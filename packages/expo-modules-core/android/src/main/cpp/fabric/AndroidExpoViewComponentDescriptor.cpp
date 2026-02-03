@@ -35,7 +35,7 @@ react::Props::Shared AndroidExpoViewComponentDescriptor::cloneProps(
     props ? dynamic_cast<const AndroidExpoViewProps &>(*props)
       : *ExpoViewShadowNode<AndroidExpoViewProps>::defaultSharedProps(),
     rawProps,
-    filterObjectKeys_
+    nullptr
   );
 
   // TODO(@lukmccall): We probably can remove this loop
@@ -55,37 +55,37 @@ react::Props::Shared AndroidExpoViewComponentDescriptor::cloneProps(
       );
     }
   }
-
-  if (!stateProps_.empty()) {
-    JNIEnv *env = jni::Environment::current();
-    const auto &rawPropsAccessor = *((RawPropsAccessor *) &rawProps);
-
-    jsi::Runtime &runtime = *rawPropsAccessor.runtime_;
-    const auto jsiProps = rawPropsAccessor.value_.asObject(runtime);
-
-    for (const auto &statePropPair: stateProps_) {
-      const auto &[propName, converter] = statePropPair;
-
-      const auto jsPropName = jsi::String::createFromUtf8(runtime, propName);
-      if (!jsiProps.hasProperty(runtime, jsPropName)) {
-        continue; // Property does not exist on the JS object
-      }
-
-      const auto value = jsiProps.getProperty(runtime, jsPropName);
-
-      if (shadowNodeProps->statePropsDiff == nullptr) {
-        shadowNodeProps->statePropsDiff = jni::make_global(
-          jni::JHashMap<jstring, jobject>::create()
-        );
-      }
-
-      jobject jConvertedValue = converter->convert(runtime, env, value);
-      shadowNodeProps->statePropsDiff->put(
-        jni::make_jstring(propName),
-        jConvertedValue
-      );
-    }
-  }
+//
+//  if (!stateProps_.empty()) {
+//    JNIEnv *env = jni::Environment::current();
+//    const auto &rawPropsAccessor = *((RawPropsAccessor *) &rawProps);
+//
+//    jsi::Runtime &runtime = *rawPropsAccessor.runtime_;
+//    const auto jsiProps = rawPropsAccessor.value_.asObject(runtime);
+//
+//    for (const auto &statePropPair: stateProps_) {
+//      const auto &[propName, converter] = statePropPair;
+//
+//      const auto jsPropName = jsi::String::createFromUtf8(runtime, propName);
+//      if (!jsiProps.hasProperty(runtime, jsPropName)) {
+//        continue; // Property does not exist on the JS object
+//      }
+//
+//      const auto value = jsiProps.getProperty(runtime, jsPropName);
+//
+//      if (shadowNodeProps->statePropsDiff == nullptr) {
+//        shadowNodeProps->statePropsDiff = jni::make_global(
+//          jni::JHashMap<jstring, jobject>::create()
+//        );
+//      }
+//
+//      jobject jConvertedValue = converter->convert(runtime, env, value);
+//      shadowNodeProps->statePropsDiff->put(
+//        jni::make_jstring(propName),
+//        jConvertedValue
+//      );
+//    }
+//  }
 
   return shadowNodeProps;
 }
