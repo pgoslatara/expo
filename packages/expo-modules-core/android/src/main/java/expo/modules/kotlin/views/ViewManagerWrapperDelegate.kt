@@ -107,6 +107,8 @@ class ViewManagerWrapperDelegate(
   }
 
   fun updateStateProps(view: View) {
+    return
+    
     if (!hasStateProps) {
       return
     }
