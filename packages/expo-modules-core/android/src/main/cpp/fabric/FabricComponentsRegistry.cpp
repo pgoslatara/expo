@@ -22,11 +22,13 @@ AndroidExpoViewComponentDescriptor::Unique concreteExpoComponentDescriptorConstr
     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
   );
 
-  descriptor->setStateProps(
-    statePropMap.at(
-      std::static_pointer_cast<std::string const>(parameters.flavor)
-    )
-  );
+  if (statePropMap.contains(std::static_pointer_cast<std::string const>(parameters.flavor))) {
+    descriptor->setStateProps(
+      statePropMap.at(
+        std::static_pointer_cast<std::string const>(parameters.flavor)
+      )
+    );
+  }
   return descriptor;
 }
 
@@ -68,16 +70,17 @@ void FabricComponentsRegistry::registerComponentsRegistry(
 
     auto propNames = statePropNames->getElement(i);
     auto propTypes = statePropTypes->getElement(i);
-    assert(propNames->size() == propTypes->size());
+    const size_t statePropsSize = propNames->size();
+    assert(statePropsSize == propTypes->size());
 
-    for (size_t j = 0; j < propNames->size(); ++j) {
+    for (size_t j = 0; j < statePropsSize; ++j) {
       auto propName = propNames->getElement(j)->toStdString();
       auto propType = propTypes->getElement(j);
       auto converter = frontendConverterProvider->obtainConverter(propType);
       propMap.emplace(propName, converter);
     }
 
-    statePropMap.emplace(
+    statePropMap.insert_or_assign(
       flavor,
       propMap
     );
