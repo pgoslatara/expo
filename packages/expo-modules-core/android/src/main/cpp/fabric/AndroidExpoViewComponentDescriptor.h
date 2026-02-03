@@ -24,11 +24,11 @@ public:
     > &stateProps
   );
 
-  react::Props::Shared cloneProps(
-    const react::PropsParserContext &context,
-    const react::Props::Shared &props,
-    react::RawProps rawProps
-  ) const override;
+//  react::Props::Shared cloneProps(
+//    const react::PropsParserContext &context,
+//    const react::Props::Shared &props,
+//    react::RawProps rawProps
+//  ) const override;
 
   void adopt(react::ShadowNode &shadowNode) const override;
 
