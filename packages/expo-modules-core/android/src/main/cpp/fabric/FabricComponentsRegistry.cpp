@@ -89,7 +89,7 @@ void FabricComponentsRegistry::registerComponentsRegistry(
       reinterpret_cast<react::ComponentHandle>(componentName),
       componentName,
       flavor,
-      &concreteExpoComponentDescriptorConstructor
+      &facebook::react::concreteComponentDescriptorConstructor<expo::AndroidExpoViewComponentDescriptor>
     });
   }
 }
