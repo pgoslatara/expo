@@ -51,8 +51,6 @@ void FabricComponentsRegistry::registerComponentsRegistry(
   jni::alias_ref<jni::JArrayClass<jni::JArrayClass<jni::JString>>> statePropNames,
   jni::alias_ref<jni::JArrayClass<jni::JArrayClass<ExpectedType>>> statePropTypes
 ) {
-  statePropMap.clear();
-
   // Inject the component to the CoreComponentsRegistry because we don't want to touch the MainApplicationReactNativeHost
   auto providerRegistry = react::CoreComponentsRegistry::sharedProviderRegistry();
 
