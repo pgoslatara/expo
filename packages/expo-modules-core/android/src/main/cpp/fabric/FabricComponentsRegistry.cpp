@@ -22,13 +22,13 @@ AndroidExpoViewComponentDescriptor::Unique concreteExpoComponentDescriptorConstr
     react::RawPropsParser(/*useRawPropsJsiValue=*/true)
   );
 
-  if (statePropMap.contains(std::static_pointer_cast<std::string const>(parameters.flavor))) {
-    descriptor->setStateProps(
-      statePropMap.at(
-        std::static_pointer_cast<std::string const>(parameters.flavor)
-      )
-    );
-  }
+//  if (statePropMap.contains(std::static_pointer_cast<std::string const>(parameters.flavor))) {
+//    descriptor->setStateProps(
+//      statePropMap.at(
+//        std::static_pointer_cast<std::string const>(parameters.flavor)
+//      )
+//    );
+//  }
   return descriptor;
 }
 
@@ -57,33 +57,33 @@ void FabricComponentsRegistry::registerComponentsRegistry(
   auto providerRegistry = react::CoreComponentsRegistry::sharedProviderRegistry();
 
   size_t size = componentNames->size();
-  assert(size == statePropNames->size());
-  assert(size == statePropTypes->size());
+//  assert(size == statePropNames->size());
+//  assert(size == statePropTypes->size());
 
-  auto frontendConverterProvider = FrontendConverterProvider::instance();
+//  auto frontendConverterProvider = FrontendConverterProvider::instance();
 
   for (size_t i = 0; i < size; ++i) {
     auto flavor = std::make_shared<std::string const>(componentNames->getElement(i)->toStdString());
     auto componentName = react::ComponentName{flavor->c_str()};
 
-    std::unordered_map<std::string, std::shared_ptr<FrontendConverter>> propMap;
+//    std::unordered_map<std::string, std::shared_ptr<FrontendConverter>> propMap;
+//
+//    auto propNames = statePropNames->getElement(i);
+//    auto propTypes = statePropTypes->getElement(i);
+//    const size_t statePropsSize = propNames->size();
+//    assert(statePropsSize == propTypes->size());
 
-    auto propNames = statePropNames->getElement(i);
-    auto propTypes = statePropTypes->getElement(i);
-    const size_t statePropsSize = propNames->size();
-    assert(statePropsSize == propTypes->size());
+//    for (size_t j = 0; j < statePropsSize; ++j) {
+//      auto propName = propNames->getElement(j)->toStdString();
+//      auto propType = propTypes->getElement(j);
+//      auto converter = frontendConverterProvider->obtainConverter(propType);
+//      propMap.emplace(propName, converter);
+//    }
 
-    for (size_t j = 0; j < statePropsSize; ++j) {
-      auto propName = propNames->getElement(j)->toStdString();
-      auto propType = propTypes->getElement(j);
-      auto converter = frontendConverterProvider->obtainConverter(propType);
-      propMap.emplace(propName, converter);
-    }
-
-    statePropMap.insert_or_assign(
-      flavor,
-      propMap
-    );
+//    statePropMap.insert_or_assign(
+//      flavor,
+//      propMap
+//    );
 
     providerRegistry->add(react::ComponentDescriptorProvider{
       reinterpret_cast<react::ComponentHandle>(componentName),
