@@ -94,12 +94,12 @@ void AndroidExpoViewComponentDescriptor::adopt(react::ShadowNode &shadowNode) co
   react_native_assert(dynamic_cast<ExpoShadowNode *>(&shadowNode));
 
   Base::adopt(shadowNode);
-
-  const auto snode = dynamic_cast<ExpoShadowNode *>(&shadowNode);
-  auto &props = *std::static_pointer_cast<const AndroidExpoViewProps>(
-    snode->getProps());
-  snode->getStateData().statePropsDiff = props.statePropsDiff;
-  props.statePropsDiff = nullptr;
+//
+//  const auto snode = dynamic_cast<ExpoShadowNode *>(&shadowNode);
+//  auto &props = *std::static_pointer_cast<const AndroidExpoViewProps>(
+//    snode->getProps());
+//  snode->getStateData().statePropsDiff = props.statePropsDiff;
+//  props.statePropsDiff = nullptr;
 }
 
 } // namespace expo
