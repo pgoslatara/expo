@@ -57,7 +57,7 @@ struct DevMenuDeveloperTools: View {
           Divider()
 
           DevMenuActionButton(
-            title: "Open JS debugger",
+            title: "Open DevTools",
             icon: "ladybug",
             action: viewModel.openJSInspector
           )

@@ -78,7 +78,7 @@ fun ToolsSection(
         },
         content = {
           NewText(
-            text = "JS debugger"
+            text = "Open DevTools"
           )
         },
         onClick = {
